@@ -19,7 +19,7 @@ Bluetooth and Sound Hardware is not available on a amd64 container like ubuntu-l
 
 TODO: can mpd run without an smb server even when it is defined to find its music there?
 
-## Molecule setup
+## Local Molecule setup (on your workstation)
 
 ### install molecule on your workstation
 
@@ -70,9 +70,9 @@ All tests run in the same container, but in order to keep the test/fix cycle sho
 the tests are separated by using specific tags in the playbook:
 
 * `molecule::snapclient` tests the base role and the snapclients
-* `molecule::cabling` tests the internal cabling with the `acable` role as far as possible
-* `molecule::small_server` tests a setup with just a `snapserver`
-* `molecule::server` tests a full blown setup with `mpd`, `snapserver` and the frontends.
+* `molecule::cabling` tests the internal cabling with the `acable` role as far as possible (not implemented yet)
+* `molecule::small_server` tests a setup with just a `snapserver` (not implemented yet)
+* `molecule::server` tests a full blown setup with `mpd`, `snapserver` and the frontends. (not implemented yet)
 
 To run only a subset of the tests, you can use e.g.:
 
@@ -105,13 +105,20 @@ For `verify`, the syntax is different due to technical reasons:
 MOLECULE_TAG=molecule::snapclient molecule --base-config molecule/config.yml verify
 ~~~
 
-
-### Debugging on the container
+### Debugging on the local container
 
 If the container is still running, you can connect to it with:
 
 ~~~
 docker exec -it test-snapclient /bin/bash
 ~~~
+
+## Github Molecule setup
+
+In order to really test the code, a self-hosted, raspberry pi based gitlab runner is deployed.
+
+TODO: 
+* describe arbitration (no external devs are allowed to use that without approval)
+* difference between dependabot (execution on ubuntu without hardware specifics) and human devs (execution on self hosted runner)
 
 
